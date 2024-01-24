@@ -1,0 +1,36 @@
+<!-- views/edit.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+</head>
+
+<body>
+    <h1>Edit Task</h1>
+
+    <form action="/tasks/update-task/<%= index %>" method="post">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" value="<%= task.taskName %>" required>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" value="<%= task.category %>">
+
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" value="<%= task.dueDate %>">
+
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+            <option value="Low" <%=task.priority==='Low' ? 'selected' : '' %>>Low</option>
+            <option value="Medium" <%=task.priority==='Medium' ? 'selected' : '' %>>Medium</option>
+            <option value="High" <%=task.priority==='High' ? 'selected' : '' %>>High</option>
+        </select>
+
+        <button type="submit">Update Task</button>
+    </form>
+</body>
+
+</html>

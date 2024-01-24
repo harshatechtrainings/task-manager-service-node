@@ -1,0 +1,252 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Serif&display=swap" rel="stylesheet">
+
+    <style>
+       
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around; /* Adjust as needed */
+    }
+
+
+    /* Style for each card */
+    .card {
+      width: 210px; /* Set your desired width */
+      margin: 10px; /* Adjust as needed */
+      padding: 15px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      background-color: rgb(232, 230, 227);
+      font-family: 'Fira Sans', sans-serif;
+    }
+    .card i {
+      margin-right: 10px; /* Increase the space between the icon and text */
+    }
+
+    .card h1{
+        font-size: 1.5em; 
+    }
+    h3{
+        font-family: 'Noto Serif', serif;
+    }
+    .buttons{
+        padding: 10px 0 0 0px;
+        text-align: center;
+    }
+
+    .buttons a{
+    text-decoration: none;
+    background: black;
+    color: white;
+    padding: 2px 5px 2px 4px;
+    border-radius: 4px;
+    }
+
+    .delete{
+        background: red !important;
+    }
+
+
+   body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .main-title h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 60%;
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: 'Noto Serif', serif;
+    }
+
+    input,
+    select {
+      font-family: 'Noto Serif', serif !important;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 2px solid black;
+      border-radius: 5px;
+    }
+
+   .new-button button {
+      background-color: #462393;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Noto Serif', serif;
+    }
+
+    .open-modal-button {
+      margin-bottom: 20px;
+    }
+    .new-button{
+        text-align: center;
+        font-family: 'Noto Serif', serif;
+    }
+
+    .submit-button{
+    padding: 4px 10px;
+    background-color: #ffffff;
+    color: black;
+    }
+
+    .close-button{
+    padding: 4px 5px;
+    background-color: #020301;
+    color: white;
+    }
+
+    .buttons button{
+        border-radius: 2px;
+        font-family: 'Noto Serif', serif !important;
+        font-size: 16px;
+        border: 2px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="main-title"><h1>Task Manager</h1></div>
+    
+    <!-- Button to open the modal -->
+    <div class="new-button">
+        <button class="open-modal-button" onclick="openModal()">New Task</button>
+    </div>
+    
+    <!-- Modal overlay -->
+    <div class="modal-overlay" id="myModal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <form action="/tasks/add-task" method="post">
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" name="taskName" required>
+    
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category">
+    
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" name="dueDate">
+    
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <div class="buttons">
+                    <button class="submit-button" type="submit">Add Task</button>
+                    <button class="close-button" onclick="closeModal()">Close</button>
+                </div>
+            </form>
+    
+            <!-- Button to close the modal -->
+            
+        </div>
+    </div>
+    <!-- <form action="/tasks/add-task" method="post" >
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" required>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category">
+
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate">
+
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <button type="submit">Add Task</button>
+    </form> -->
+
+
+    <div class="container">
+        <% myList.forEach((task, index)=> { %>
+            <div  class="card">
+                <h1><i class="fas fa-tasks"></i><%= task.taskName %></h1>
+                <h3><i class="fas fa-folder"></i><%= task.category %></h3>
+                <div>
+                    <h5><i class="far fa-calendar-alt"></i><%= task.dueDate %></h5>
+                    <h5><i class="fas fa-flag"></i><%= task.priority %></h5>
+                </div>
+                <div class="buttons">
+                    <a href="/tasks/edit-task/<%= task._id %>">Edit</a>
+                    <a class="delete" href="/tasks/delete-task/<%= task._id %>">Delete</a>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+    <script>
+        // Function to generate a random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Apply random colors to each card using forEach loop
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.borderBottom = "15px solid"+ getRandomColor();
+        });
+
+
+        function openModal() {
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
