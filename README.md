@@ -56,11 +56,10 @@ The application will be accessible at http://localhost:3000.
 **Create a Task:**
 
 - Navigate to the user interface and use the provided form to create a new task.
-  -Specify task details, including priority and completion time.
-  -Receive Reminders:
+- Specify task details, including priority and completion time.
+- Receive Reminders:
 
 - The application will automatically send reminders via email based on the specified task priorities and completion times.
-  View and Manage Tasks:
-
+**View and Manage Tasks:**
 - Access the user interface to view, edit, and mark tasks as completed.
 - Task details are seamlessly fetched from the MongoDB database for display.
