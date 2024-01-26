@@ -65,3 +65,7 @@ The application will be accessible at http://localhost:3000.
 
 - Access the user interface to view, edit, and mark tasks as completed.
 - Task details are seamlessly fetched from the MongoDB database for display.
+
+# Pending
+
+- Yet to implement the the email notification logic, completed button.
