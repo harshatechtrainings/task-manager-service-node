@@ -2,7 +2,7 @@
 
 ### task-manager-service-node
 
-    The Task Manager Service Node is a Node.js application designed to efficiently organize tasks, send reminders via email, and prioritize tasks based on user-defined parameters. Users can create tasks, specifying priorities and completion times, and the system will automatically send reminders to ensure timely completion. The application leverages MongoDB to store task details, facilitating seamless retrieval and display in the user interface.
+The Task Manager Service Node is a Node.js application designed to efficiently organize tasks, send reminders via email, and prioritize tasks based on user-defined parameters. Users can create tasks, specifying priorities and completion times, and the system will automatically send reminders to ensure timely completion. The application leverages MongoDB to store task details, facilitating seamless retrieval and display in the user interface.
 
 ## Features
 
@@ -63,4 +63,4 @@ The application will be accessible at http://localhost:3000.
 View and Manage Tasks:
 
 -Access the user interface to view, edit, and mark tasks as completed.
--Task details are seamlessly fetched from the MongoDB database for display.
+-Task details are seamlessly fetched from the MongoDB database for display
