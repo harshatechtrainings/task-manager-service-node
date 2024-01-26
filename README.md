@@ -60,6 +60,8 @@ The application will be accessible at http://localhost:3000.
 - Receive Reminders:
 
 - The application will automatically send reminders via email based on the specified task priorities and completion times.
+
 **View and Manage Tasks:**
+
 - Access the user interface to view, edit, and mark tasks as completed.
 - Task details are seamlessly fetched from the MongoDB database for display.
